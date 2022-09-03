@@ -6,7 +6,7 @@ const login = async (req, res) => {
   const { password, email } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
-    if (!user) return res.status(400).send({ message: 'Cannot authenticate user' });
+    if (!user) return res.status(400).send({ message: 'Cannot authenticate user 1' });
     if (await compare(password, user.password)) {
       await User.update({ status: 'connected' }, { where: { id: user.id } });
       return res.status(201).send({

@@ -9,14 +9,16 @@ export default class Login {
     this.localStorage = localStorage
     this.onNavigate = onNavigate
     this.PREVIOUS_LOCATION = PREVIOUS_LOCATION
+    console.log(onNavigate)
     this.store = store
     const formEmployee = this.document.querySelector(`form[data-testid="form-employee"]`)
     formEmployee.addEventListener("submit", this.handleSubmitEmployee)
     const formAdmin = this.document.querySelector(`form[data-testid="form-admin"]`)
-    formAdmin.addEventListener("submit", this.handleSubmitAdmin)
+    formAdmin.addEventListener("submit", this.handleSubmitAdmin) 
   }
   handleSubmitEmployee = e => {
     e.preventDefault()
+    console.log('test');
     const user = {
       type: "Employee",
       email: e.target.querySelector(`input[data-testid="employee-email-input"]`).value,
@@ -30,7 +32,8 @@ export default class Login {
       )
       .then(() => {
         this.onNavigate(ROUTES_PATH['Bills'])
-        this.PREVIOUS_LOCATION = ROUTES_PATH['Bills']
+        console.log('44');
+        // window.onNavigate(ROUTES_PATH['Bills'])
         PREVIOUS_LOCATION = this.PREVIOUS_LOCATION
         this.document.body.style.backgroundColor="#fff"
       })
@@ -41,8 +44,8 @@ export default class Login {
     e.preventDefault()
     const user = {
       type: "Admin",
-      email: e.target.querySelector(`input[data-testid="employee-email-input"]`).value,
-      password: e.target.querySelector(`input[data-testid="employee-password-input"]`).value,
+      email: e.target.querySelector(`input[data-testid="admin-email-input"]`).value,
+      password: e.target.querySelector(`input[data-testid="admin-password-input"]`).value,
       status: "connected"
     }
     this.localStorage.setItem("user", JSON.stringify(user))
@@ -52,6 +55,7 @@ export default class Login {
       )
       .then(() => {
         this.onNavigate(ROUTES_PATH['Dashboard'])
+        // window.onNavigate(ROUTES_PATH['Dashboard'])
         this.PREVIOUS_LOCATION = ROUTES_PATH['Dashboard']
         PREVIOUS_LOCATION = this.PREVIOUS_LOCATION
         document.body.style.backgroundColor="#fff"
@@ -69,6 +73,7 @@ export default class Login {
         localStorage.setItem('jwt', jwt)
       })
     } else {
+      console.log('echec');
       return null
     }
   }
