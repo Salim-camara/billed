@@ -24,7 +24,6 @@ export default class NewBill {
     const email = JSON.parse(localStorage.getItem("user")).email
     formData.append('file', file)
     formData.append('email', email)
-
     this.store
       .bills()
       .create({
@@ -41,8 +40,9 @@ export default class NewBill {
       }).catch(error => console.error(error))
   }
   handleSubmit = e => {
+    console.log('test e ', e)
     e.preventDefault()
-    console.log('e.target.querySelector(`input[data-testid="datepicker"]`).value', e.target.querySelector(`input[data-testid="datepicker"]`).value)
+    console.log("43 ", e.target.querySelector(`input[data-testid="datepicker"]`).value);
     const email = JSON.parse(localStorage.getItem("user")).email
     const bill = {
       email,
@@ -58,11 +58,12 @@ export default class NewBill {
       status: 'pending'
     }
     this.updateBill(bill)
-    this.onNavigate(ROUTES_PATH['Bills'])
+    // this.onNavigate(ROUTES_PATH['Bills'])
   }
 
   // not need to cover this function by tests
   updateBill = (bill) => {
+    console.log("45 ", JSON.stringify(bill))
     if (this.store) {
       this.store
       .bills()
