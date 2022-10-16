@@ -32,13 +32,13 @@ export default class {
       return this.store
       .bills()
       .list()
-      .then(snapshot => {
-        const bills = snapshot
+      .then(async snapshot => {
+        const bills = await snapshot
           .map(doc => {
             try {
               return {
                 ...doc,
-                date: formatDate(doc.date),
+                date: doc.date,
                 status: formatStatus(doc.status)
               }
             } catch(e) {
@@ -52,8 +52,15 @@ export default class {
               }
             }
           })
-          console.log('length', bills.length)
-        return bills
+          const filterBills = await bills.sort((a, b) => {
+            return new Date (b.date) - new Date (a.date)
+          })
+          for(const element of filterBills) {
+            element.date = formatDate(element.date)
+          }
+
+        return filterBills
+
       })
     }
   }

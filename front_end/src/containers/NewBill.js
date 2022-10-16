@@ -26,14 +26,14 @@ export default class NewBill {
     formData.append('email', email)
     this.store
       .bills()
-      .create({
+      .create(
+        {
         data: formData,
         headers: {
           noContentType: true
         }
       })
       .then(({fileUrl, key}) => {
-        console.log(fileUrl)
         this.billId = key
         this.fileUrl = fileUrl
         this.fileName = fileName

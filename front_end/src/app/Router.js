@@ -19,7 +19,7 @@ export default () => {
   }
   
   window.onNavigate = (pathname) => {
-
+    console.log('22')
     window.history.pushState(
       {},
       pathname,
