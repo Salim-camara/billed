@@ -5,6 +5,8 @@ const getFileURL = (filePath) => `http://localhost:5678/${filePath}`;
 const isPicture = (mimeType) => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'].includes(mimeType);
 
 const create = async (req, res) => {
+  const test = {...req}
+  console.log('************************ ' + console.log(req.body));
   const { user } = req;
   if (!user) return res.status(401).send({ message: 'user must be authenticated' });
   try {

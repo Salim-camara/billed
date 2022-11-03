@@ -24,6 +24,14 @@ const rows = (data) => {
 }
 
 export default ({ data: bills, loading, error }) => {
+
+  if(typeof bills === 'undefined') {
+    bills = []
+  }
+  const antiChrono = (a, b) => ((new Date(a.date) < new Date(b.date)) ? 1 : -1);
+  console.log('30 ', bills)
+  bills.sort(antiChrono);
+
   
   const modal = () => (`
     <div class="modal fade" id="modaleFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
