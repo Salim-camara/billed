@@ -87,15 +87,11 @@ export default class {
 
   handleEditTicket(e, bill, bills) {
     console.log('89 ', bill)
-    let state = null
-    switch (bill.status) {
-      case 'pending': state = 'Attentes';
-      break;
-      case 'accepted': state = 'Validations';
-      break;
-      case 'refused': state = 'Refus';
-      break;
-    }
+    let state = {
+      pending: 'Attentes',
+      accepted: 'Validations',
+      refused: 'Refus',
+    }[bill.status]
     this.document.querySelector('#statusOfBill').innerHTML = `${state}`
     if (this.counter === undefined || this.id !== bill.id) this.counter = 0
     if (this.id === undefined || this.id !== bill.id) this.id = bill.id
