@@ -5,8 +5,10 @@
 import {screen, waitFor} from "@testing-library/dom"
 import BillsUI from "../views/BillsUI.js"
 import { bills } from "../fixtures/bills.js"
+import store from "../app/Store"
 import { ROUTES_PATH} from "../constants/routes.js";
 import {localStorageMock} from "../__mocks__/localStorage.js";
+import BillsContainer from "../containers/Bills.js"
 
 import router from "../app/Router.js";
 
@@ -24,9 +26,13 @@ describe("Given I am connected as an employee", () => {
       router()
       window.onNavigate(ROUTES_PATH.Bills)
       await waitFor(() => screen.getByTestId('icon-window'))
+      await waitFor(() => screen.getByTestId('btn-new-bill'))
       const windowIcon = screen.getByTestId('icon-window')
+      const btnNewBill = screen.getByTestId('btn-new-bill')
       //to-do write expect expression
       expect(windowIcon.classList.contains("active-icon")).toBeTruthy()
+      // expect(btnNewBill.classList.contains("btn-primary")).toBeTruthy()
+
 
     })
     test("Then bills should be ordered from earliest to latest", () => {
@@ -37,6 +43,23 @@ describe("Given I am connected as an employee", () => {
       console.log('36', datesSorted)
       console.log('37', dates)
       expect(dates).toEqual(datesSorted)
+    })
+
+    test('Test', () => {
+      const billsContainerInstance = new BillsContainer({ document, onNavigate, store, localStorage })
+      expect(billsContainerInstance.test1()).toBeTruthy()
+      expect(billsContainerInstance.test2()).toBeTruthy()
+
+    })
+
+    test('test2', () => {
+      const billsContainerInstance = new BillsContainer({ document, onNavigate, store, localStorage })
+      const iconEye = document.querySelectorAll(`div[data-testid="icon-eye"]`)
+      iconEye[0].click()
+      const modal = document.querySelector(`#modaleFile`)
+      console.log('60 ', modal)
+      expect(modal.classList.contains("show")).toBeTruthy()
+
     })
   })
 })

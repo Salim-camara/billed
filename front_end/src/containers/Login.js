@@ -4,18 +4,41 @@ export let PREVIOUS_LOCATION = ''
 
 // we use a class so as to test its methods in e2e tests
 export default class Login {
-  constructor({ document, localStorage, onNavigate, PREVIOUS_LOCATION, store }) {
-    this.document = document
-    this.localStorage = localStorage
-    this.onNavigate = onNavigate
-    this.PREVIOUS_LOCATION = PREVIOUS_LOCATION
-    console.log(onNavigate)
-    this.store = store
-    const formEmployee = this.document.querySelector(`form[data-testid="form-employee"]`)
-    formEmployee.addEventListener("submit", this.handleSubmitEmployee)
-    const formAdmin = this.document.querySelector(`form[data-testid="form-admin"]`)
-    formAdmin.addEventListener("submit", this.handleSubmitAdmin) 
+  // constructor({ document, localStorage, onNavigate, PREVIOUS_LOCATION, store }) {
+  //   this.document = document
+  //   this.localStorage = localStorage
+  //   this.onNavigate = onNavigate
+  //   this.PREVIOUS_LOCATION = PREVIOUS_LOCATION
+  //   console.log(onNavigate)
+  //   this.store = store
+  //   const formEmployee = this.document.querySelector(`form[data-testid="form-employee"]`)
+  //   formEmployee.addEventListener("submit", this.handleSubmitEmployee)
+  //   const formAdmin = this.document.querySelector(`form[data-testid="form-admin"]`)
+  //   formAdmin.addEventListener("submit", this.handleSubmitAdmin) 
+  // }
+  
+  constructor({
+    document,
+    localStorage,
+    onNavigate,
+    PREVIOUS_LOCATION,
+    store,
+  }) {
+    this.document = document;
+    this.localStorage = localStorage;
+    this.onNavigate = onNavigate;
+    this.PREVIOUS_LOCATION = PREVIOUS_LOCATION;
+    this.store = store;
+    const formEmployee = this.document.querySelector(
+      `form[data-testid="form-employee"]`
+    );
+    formEmployee.addEventListener("submit", this.handleSubmitEmployee);
+    const formAdmin = this.document.querySelector(
+      `form[data-testid="form-admin"]`
+    );
+    formAdmin.addEventListener("submit", this.handleSubmitAdmin);
   }
+  
   handleSubmitEmployee = e => {
     e.preventDefault()
     console.log('test');
