@@ -27,13 +27,6 @@ export default class {
     $('#modaleFile').modal('show')
   }
 
-  test1 = () => {
-    return true
-  }
-
-  test2 = () => {
-    return true
-  }
 
   getBills = () => {
     if (this.store) {

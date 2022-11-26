@@ -19,7 +19,6 @@ export default () => {
   }
   
   window.onNavigate = (pathname) => {
-    console.log('22')
     window.history.pushState(
       {},
       pathname,
@@ -29,6 +28,7 @@ export default () => {
       handleLoginPage()
     } else if (pathname === ROUTES_PATH['Bills']) {
       rootDiv.innerHTML = ROUTES({ pathname, loading: true })
+      // console.log('l31 ', )
       const divIcon1 = document.getElementById('layout-icon1')
       const divIcon2 = document.getElementById('layout-icon2')
       divIcon1.classList.add('active-icon')
@@ -65,7 +65,6 @@ export default () => {
 
   if(window.location.hash === '') {
     handleLoginPage()
-    console.log('hello blue');
   }
 
   window.onpopstate = (e) => {

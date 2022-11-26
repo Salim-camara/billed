@@ -7,10 +7,8 @@ export default class NewBill {
     this.onNavigate = onNavigate
     this.store = store
     const formNewBill = this.document.querySelector(`form[data-testid="form-new-bill"]`)
-    console.log('10 ', formNewBill)
     formNewBill.addEventListener("submit", this.handleSubmit)
     const file = this.document.querySelector(`input[data-testid="file"]`)
-    console.log('17 ', file)
     file.addEventListener("change", this.handleChangeFile)
     this.fileUrl = null
     this.fileName = null
@@ -42,9 +40,7 @@ export default class NewBill {
       }).catch(error => console.error(error))
   }
   handleSubmit = e => {
-    console.log('test e ', e)
     e.preventDefault()
-    console.log("43 ", e.target.querySelector(`input[data-testid="datepicker"]`).value);
     const email = JSON.parse(localStorage.getItem("user")).email
     const bill = {
       email,
@@ -65,7 +61,7 @@ export default class NewBill {
 
   // not need to cover this function by tests
   updateBill = (bill) => {
-    console.log("45 ", JSON.stringify(bill))
+    // console.log("45 ", JSON.stringify(bill))
     if (this.store) {
       this.store
       .bills()

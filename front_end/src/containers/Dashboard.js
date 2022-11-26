@@ -86,7 +86,6 @@ export default class {
   }
 
   handleEditTicket(e, bill, bills) {
-    console.log('89 ', bill)
     let state = {
       pending: 'Attentes',
       accepted: 'Validations',

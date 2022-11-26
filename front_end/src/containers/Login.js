@@ -41,7 +41,6 @@ export default class Login {
   
   handleSubmitEmployee = e => {
     e.preventDefault()
-    console.log('test');
     const user = {
       type: "Employee",
       email: e.target.querySelector(`input[data-testid="employee-email-input"]`).value,
@@ -55,7 +54,6 @@ export default class Login {
       )
       .then(() => {
         this.onNavigate(ROUTES_PATH['Bills'])
-        console.log('44');
         // window.onNavigate(ROUTES_PATH['Bills'])
         PREVIOUS_LOCATION = this.PREVIOUS_LOCATION
         this.document.body.style.backgroundColor="#fff"
@@ -96,7 +94,6 @@ export default class Login {
         localStorage.setItem('jwt', jwt)
       })
     } else {
-      console.log('echec');
       return null
     }
   }
@@ -113,7 +110,6 @@ export default class Login {
         password: user.password,
       })})
       .then(() => {
-        console.log(`User with ${user.email} is created`)
         return this.login(user)
       })
     } else {
