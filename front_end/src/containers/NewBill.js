@@ -11,7 +11,7 @@ export default class NewBill {
     const file = this.document.querySelector(`input[data-testid="file"]`)
     file.addEventListener("change", this.handleChangeFile)
     this.fileUrl = null
-    this.fileName = null
+    this.fileName = null 
     this.billId = null
     new Logout({ document, localStorage, onNavigate })
   }
