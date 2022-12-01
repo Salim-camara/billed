@@ -56,23 +56,6 @@ describe("Given I am connected as an employee", () => {
     });
 
     test("check if modal is diplayed", async () => {
-      // const billsInstance = new BillsContainer({
-      //   document,
-      //   onNavigate,
-      //   store,
-      //   localStorage,
-      // });
-      // const iconEye = screen.getAllByTestId("icon-eye");
-      // console.log("l60 ", iconEye[0]);
-      // iconEye[0].click();
-      // billsInstance.handleClickIconEye(iconEye[0])
-      // userEvent.click(iconEye[0])
-      // await waitFor(() => screen.findBy('modal2'))
-      // setTimeout(() => {
-      //   expect(
-      //     screen.getByTestId("modal2").classList.contains("show")
-      //   ).toBeTruthy();
-      // }, 1000);
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({ pathname });
       };
@@ -117,17 +100,34 @@ describe("Given I am connected as an employee", () => {
     test("Then fetches bills from mock API GET", async () => {
       localStorage.setItem(
         "user",
-        JSON.stringify({ type: "Admin", email: "a@a" })
+        JSON.stringify({ type: "Admin", email: "test@test.fr" })
       );
       new BillsContainer({
         document,
         onNavigate,
-        mockStore,
+        store,
         localStorage: window.localStorage,
       });
       document.body.innerHTML = BillsUI({ data: bills });
+      BillsContainer.getBills();
       await waitFor(() => screen.getByText("Mes notes de frais"));
       expect(screen.getByText("Mes notes de frais")).toBeTruthy();
     });
+
+    // test("Then fetches bills from mock API GET", async () => {
+    //   localStorage.setItem(
+    //     "user",
+    //     JSON.stringify({ type: "Admin", email: "a@a" })
+    //   );
+    //   new BillsContainer({
+    //     document,
+    //     onNavigate,
+    //     mockStore,
+    //     localStorage: window.localStorage,
+    //   });
+    //   document.body.innerHTML = BillsUI({ data: bills });
+    //   await waitFor(() => screen.getByText("Mes notes de frais"));
+    //   expect(screen.getByText("Mes notes de frais")).toBeTruthy();
+    // });
   });
 });
