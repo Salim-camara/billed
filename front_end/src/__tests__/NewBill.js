@@ -5,6 +5,12 @@
 import { screen, waitFor, fireEvent, toHaveClass } from "@testing-library/dom";
 import NewBillUI from "../views/NewBillUI.js";
 import NewBill from "../containers/NewBill.js";
+import userEvent from "@testing-library/user-event";
+import { localStorageMock } from "../__mocks__/localStorage.js";
+import mockStore from "../__mocks__/store";
+import store from "../app/Store.js";
+
+jest.mock("../app/store", () => mockStore);
 
 const onNavigate = (pathname) => {
   document.body.innerHTML = ROUTES({ pathname });
@@ -25,7 +31,7 @@ describe("Given I am connected as an employee", () => {
           "user",
           JSON.stringify({
             type: "Employee",
-            email: "a@a",
+            email: "test@test.fr",
           })
         );
         const formNewBill = screen.getByTestId("form-new-bill");
@@ -35,6 +41,28 @@ describe("Given I am connected as an employee", () => {
         fireEvent.submit(formNewBill);
         expect(handleSubmit).toHaveBeenCalled();
       });
+    });
+    test("The i change file", () => {
+      console.log("l47 ", store.bills);
+      window.localStorage.setItem(
+        "user",
+        JSON.stringify({
+          type: "Employee",
+        })
+      );
+      const newBillInit = new NewBill({
+        document,
+        onNavigate,
+        store,
+        localStorage: window.localStorage,
+      });
+      const file = new File(["image"], "image.png", { type: "image/png" });
+      const handleChangeFile = jest.fn((e) => newBillInit.handleChangeFile(e));
+      const billFile = screen.getByTestId("file");
+      billFile.addEventListener("change", handleChangeFile);
+      userEvent.upload(billFile, file);
+      expect(billFile.files[0].name).toBeDefined();
+      expect(handleChangeFile).toBeCalled();
     });
   });
 });
