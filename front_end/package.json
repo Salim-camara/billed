@@ -21,7 +21,9 @@
     "express": "^4.17.1",
     "global": "^4.4.0",
     "jquery": "^3.5.1",
-    "path": "^0.12.7"
+    "node-fetch": "^3.3.0",
+    "path": "^0.12.7",
+    "y18n": "^5.0.8"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.10.4",

@@ -52,14 +52,15 @@ export default class {
               }
             }
           })
-          const filterBills = await bills.sort((a, b) => {
-            return new Date (b.date) - new Date (a.date)
-          })
-          for(const element of filterBills) {
-            element.date = formatDate(element.date)
-          }
+          return bills;
+        //   const filterBills = await bills.sort((a, b) => {
+        //     return new Date (b.date) - new Date (a.date)
+        //   })
+        //   for(const element of filterBills) {
+        //     element.date = formatDate(element.date)
+        //   }
 
-        return filterBills
+        // return filterBills
 
       })
     }

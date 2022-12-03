@@ -17,7 +17,6 @@ import BillsContainer from "../containers/Bills.js";
 import NewBillContainer from "../containers/NewBill.js";
 import userEvent from "@testing-library/user-event";
 import mockStore from "../__mocks__/store";
-
 import router from "../app/Router.js";
 
 describe("Given I am connected as an employee", () => {
@@ -97,36 +96,21 @@ describe("Given I am connected as an employee", () => {
       expect(screen.queryByText("Envoyer une note de frais")).toBeTruthy();
     });
 
-    test("Then fetches bills from mock API GET", async () => {
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ type: "Admin", email: "test@test.fr" })
-      );
-      new BillsContainer({
-        document,
-        onNavigate,
-        store,
-        localStorage: window.localStorage,
-      });
-      document.body.innerHTML = BillsUI({ data: bills });
-      BillsContainer.getBills();
-      await waitFor(() => screen.getByText("Mes notes de frais"));
-      expect(screen.getByText("Mes notes de frais")).toBeTruthy();
-    });
-
     // test("Then fetches bills from mock API GET", async () => {
     //   localStorage.setItem(
     //     "user",
-    //     JSON.stringify({ type: "Admin", email: "a@a" })
+    //     JSON.stringify({ type: "Admin", email: "test@test.fr" })
     //   );
-    //   new BillsContainer({
+    //   const billsContain = new BillsContainer({
     //     document,
     //     onNavigate,
-    //     mockStore,
+    //     store,
     //     localStorage: window.localStorage,
     //   });
     //   document.body.innerHTML = BillsUI({ data: bills });
-    //   await waitFor(() => screen.getByText("Mes notes de frais"));
+    //   console.log('l113 ', billsContain)
+    //   // billsContain.getBills();
+    //   // await waitFor(() => screen.getByText("Mes notes de frais"));
     //   expect(screen.getByText("Mes notes de frais")).toBeTruthy();
     // });
   });
