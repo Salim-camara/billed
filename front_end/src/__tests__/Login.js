@@ -221,6 +221,7 @@ describe("Given that I am a user on login page", () => {
           status: "connected",
         })
       );
+      login.createUser()
     });
 
     test("It should renders HR dashboard page", () => {

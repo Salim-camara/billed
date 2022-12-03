@@ -4,19 +4,6 @@ export let PREVIOUS_LOCATION = ''
 
 // we use a class so as to test its methods in e2e tests
 export default class Login {
-  // constructor({ document, localStorage, onNavigate, PREVIOUS_LOCATION, store }) {
-  //   this.document = document
-  //   this.localStorage = localStorage
-  //   this.onNavigate = onNavigate
-  //   this.PREVIOUS_LOCATION = PREVIOUS_LOCATION
-  //   console.log(onNavigate)
-  //   this.store = store
-  //   const formEmployee = this.document.querySelector(`form[data-testid="form-employee"]`)
-  //   formEmployee.addEventListener("submit", this.handleSubmitEmployee)
-  //   const formAdmin = this.document.querySelector(`form[data-testid="form-admin"]`)
-  //   formAdmin.addEventListener("submit", this.handleSubmitAdmin) 
-  // }
-  
   constructor({
     document,
     localStorage,
@@ -71,12 +58,8 @@ export default class Login {
     }
     this.localStorage.setItem("user", JSON.stringify(user))
     this.login(user)
-      .catch(
-        (err) => this.createUser(user)
-      )
       .then(() => {
         this.onNavigate(ROUTES_PATH['Dashboard'])
-        // window.onNavigate(ROUTES_PATH['Dashboard'])
         this.PREVIOUS_LOCATION = ROUTES_PATH['Dashboard']
         PREVIOUS_LOCATION = this.PREVIOUS_LOCATION
         document.body.style.backgroundColor="#fff"
