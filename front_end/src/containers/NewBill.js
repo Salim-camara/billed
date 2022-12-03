@@ -38,6 +38,8 @@ export default class NewBill {
         this.fileUrl = fileUrl
         this.fileName = fileName
       }).catch(error => console.error(error))
+      console.log('l44', this.store)
+    
   }
   handleSubmit = e => {
     e.preventDefault()

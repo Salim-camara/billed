@@ -8,6 +8,7 @@ import NewBill from "../containers/NewBill.js";
 import userEvent from "@testing-library/user-event";
 import { localStorageMock } from "../__mocks__/localStorage.js";
 import mockStore from "../__mocks__/store";
+import { ROUTES, ROUTES_PATH } from "../constants/routes.js";
 import store from "../app/Store.js";
 
 jest.mock("../app/store", () => mockStore);
@@ -25,10 +26,11 @@ describe("Given I am connected as an employee", () => {
         const newBill1 = new NewBill({
           document,
           onNavigate,
+          store,
           localStorage: window.localStorage,
         });
         localStorage.setItem(
-          "user",
+          "user", 
           JSON.stringify({
             type: "Employee",
             email: "test@test.fr",
@@ -40,10 +42,12 @@ describe("Given I am connected as an employee", () => {
         formNewBill.addEventListener("submit", handleSubmit);
         fireEvent.submit(formNewBill);
         expect(handleSubmit).toHaveBeenCalled();
+        await waitFor(() => screen.getByTestId("btn-new-bill"));
       });
     });
-    test("The i change file", () => {
-      console.log("l47 ", store.bills);
+    test("Then i change file", () => {
+      const html = NewBillUI();
+        document.body.innerHTML = html;
       window.localStorage.setItem(
         "user",
         JSON.stringify({
