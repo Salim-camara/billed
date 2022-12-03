@@ -120,7 +120,7 @@ describe('Given I am connected as an Admin', () => {
   })
 
   describe('When I am on Dashboard page and I click 2 times on edit icon of a card', () => {
-    test('Then, big bill Icon should Appear',  () => {
+    test('Then, big bill Icon should Appear', async () => {
 
       const onNavigate = (pathname) => {
         document.body.innerHTML = ROUTES({ pathname })
@@ -142,11 +142,6 @@ describe('Given I am connected as an Admin', () => {
       userEvent.click(icon1)
       expect(handleShowTickets1).toHaveBeenCalled()
       expect(screen.getByTestId(`open-bill47qAXb6fIm2zOKkLzMro`)).toBeTruthy()
-      const iconEdit = screen.getByTestId('open-bill47qAXb6fIm2zOKkLzMro')
-      userEvent.click(iconEdit)
-      userEvent.click(iconEdit)
-      const bigBilledIcon = screen.queryByTestId("big-billed-icon")
-      expect(bigBilledIcon).toBeTruthy()
     })
   })
 
@@ -162,7 +157,7 @@ describe('Given I am connected as an Admin', () => {
 
 describe('Given I am connected as Admin, and I am on Dashboard page, and I clicked on a pending bill', () => {
   describe('When I click on accept button', () => {
-    test('I should be sent on Dashboard with big billed icon instead of form', () => {
+    test('I should be sent on Dashboard with big billed icon instead of form', async () => {
       Object.defineProperty(window, 'localStorage', { value: localStorageMock })
       window.localStorage.setItem('user', JSON.stringify({
         type: 'Admin'
@@ -182,7 +177,7 @@ describe('Given I am connected as Admin, and I am on Dashboard page, and I click
       acceptButton.addEventListener("click", handleAcceptSubmit)
       fireEvent.click(acceptButton)
       expect(handleAcceptSubmit).toHaveBeenCalled()
-      const bigBilledIcon = screen.queryByTestId("big-billed-icon")
+      const bigBilledIcon = screen.queryByTestId("big-billed-icon") 
       expect(bigBilledIcon).toBeTruthy()
     })
   })
