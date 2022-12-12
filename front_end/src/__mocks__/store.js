@@ -89,5 +89,12 @@ export default {
     return mockedBills
     //return {}
   },
+  users() {
+    return {
+      create(user) {
+        return Promise.resolve({email: 'test@test.fr', password: 'test'})
+      },
+    }
+  }
 }
 

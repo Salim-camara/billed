@@ -6,6 +6,8 @@ import LoginUI from "../views/LoginUI";
 import Login from "../containers/Login.js";
 import { ROUTES } from "../constants/routes";
 import { fireEvent, screen } from "@testing-library/dom";
+import Store from "../app/Store";
+import mockStore from "../__mocks__/store"
 
 describe("Given that I am a user on login page", () => {
   describe("When I do not fill fields and I click on employee button Login In", () => {
@@ -84,7 +86,7 @@ describe("Given that I am a user on login page", () => {
 
       let PREVIOUS_LOCATION = "";
 
-      const store = jest.fn();
+      const store = Store;
 
       const login = new Login({
         document,
@@ -196,7 +198,7 @@ describe("Given that I am a user on login page", () => {
 
       let PREVIOUS_LOCATION = "";
 
-      const store = jest.fn();
+      const store = mockStore;
 
       const login = new Login({
         document,
@@ -221,7 +223,12 @@ describe("Given that I am a user on login page", () => {
           status: "connected",
         })
       );
-      login.createUser()
+      login.createUser({
+        email: 'test@test.fr',
+        name: 'hello',
+        type: 'admin',
+        password: 'password',
+      })
     });
 
     test("It should renders HR dashboard page", () => {
